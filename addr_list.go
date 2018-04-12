@@ -116,22 +116,23 @@ func (o *AddrHa) isInited() () {
 }
 
 //获取测试结果接口
-func (o *AddrHa) FatestAddr() (*url.URL, time.Duration) {
+func (o *AddrHa) FatestAddr() (*url.URL, *Speed) {
 	fatest := DEFAULT_SPEED_MAX
 	var faddr *url.URL
+	var fspeed *Speed
 
 	o.isInited()
 
 	o.Lock()
 	o.Unlock()
 	for addr, speed := range o.speed {
-		if speed.DurationForCompare() < fatest {
-			fatest = speed.DurationForCompare()
+		if speed.DurationForCompare() <= fatest {
 			faddr = o.addrList[addr].UrlInfo()
+			fspeed = speed
 		}
 	}
 
-	return faddr, fatest
+	return faddr, fspeed
 }
 
 //获取测试结果

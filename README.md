@@ -4,6 +4,12 @@
 
 可用于Failover HA、Registry HA等项目中。
 
+## Install
+```shell
+go get -v github.com/zhujingfa/addrha
+```
+
+## Usage
 ```go
 func TestFindFatestServerTest(t *testing.T) {
 	hosts := []string{"tcp://10.0.0.1:8500", "tcp://10.0.0.2:8500", "tcp://10.0.0.3:8500"}

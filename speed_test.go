@@ -19,6 +19,7 @@ func TestFindFatestServerTest(t *testing.T) {
 		t.Fatalf("Found err when Parse: %v", err.Error())
 	}
 
+	//speed_test.go:22: Parse result: scheme tcp, host hn99.node.ifanghui.cn:8500, path /user, query query=hello RequestURI /user?query=hello
 	t.Logf("Parse result: scheme %v, host %v, path %v, query %v RequestURI %v", uinfo.Scheme, uinfo.Host, uinfo.Path, uinfo.RawQuery, uinfo.RequestURI())
 	if uinfo.Scheme != "tcp" {
 		t.Fatalf("Found err uinfo.Scheme!=tcp: %v", uinfo.Scheme)
@@ -40,11 +41,11 @@ func TestFindFatestServerTest(t *testing.T) {
 		t.Logf("ha.SpeedResult: %v, %v", i, v.String())
 	}
 
-	uinfo, dur := ha.FatestAddr()
-	if dur == DEFAULT_SPEED_MAX {
-		t.Fatalf("ha.FatestAddr error: dur==DEFAULT_SPEED_MAX.")
+	uinfo, speed := ha.FatestAddr()
+	if speed.Err != nil {
+		t.Fatalf("ha.FatestAddr error: %s.", speed.Err.Error())
 	}
-	t.Logf("ha.FatestAddr: %v, %v", uinfo.String(), dur)
+	t.Logf("ha.FatestAddr: %v, %v", uinfo.String(), speed.Dur.String())
 }
 
 
