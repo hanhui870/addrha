@@ -10,7 +10,8 @@ import (
 )
 
 const (
-	DEFAULT_SPEEDTEST_INTERVAL = 10 * time.Second
+	//无论添加、初始化AddrHA都会立马获取数据，更新采样更低频率即可
+	DEFAULT_SPEEDTEST_INTERVAL = 10 * time.Minute
 	//默认系统最大的测速时间
 	DEFAULT_SPEED_MAX = time.Hour
 
